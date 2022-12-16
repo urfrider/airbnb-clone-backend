@@ -7,11 +7,15 @@ class Room(CommonModel):
 
     """Room Model Definition"""
 
-    class RoomKindChoices(models.TextChoices):
+    class RoomTypeChoices(models.TextChoices):
         ENTIRE_PLACE = ("entire_place", "Entire Place")
         PRIVATE_ROOM = ("private_room", "Private Room")
         SHARED_ROOM = ("shared_room", "Shared Room")
 
+    name = models.CharField(
+        max_length=150,
+        default="",
+    )
     country = models.CharField(
         max_length=50,
         default="South Korea",
@@ -30,9 +34,9 @@ class Room(CommonModel):
     pet_friendly = models.BooleanField(
         default=True,
     )
-    kind = models.CharField(
+    type = models.CharField(
         max_length=20,
-        choices=RoomKindChoices.choices,
+        choices=RoomTypeChoices.choices,
     )
     owner = models.ForeignKey(
         AUTH_USER_MODEL,
@@ -41,6 +45,9 @@ class Room(CommonModel):
     amenities = models.ManyToManyField(
         "rooms.Amenity",
     )
+
+    def __str__(self):
+        return self.name
 
 
 class Amenity(CommonModel):
@@ -53,4 +60,11 @@ class Amenity(CommonModel):
     description = models.CharField(
         max_length=150,
         default="",
+        blank=True,
     )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Amenities"
