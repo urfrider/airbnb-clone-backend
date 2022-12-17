@@ -32,6 +32,12 @@ class Experience(CommonModel):
     services = models.ManyToManyField(
         "experiences.Service",
     )
+    category = models.ForeignKey(
+        "categories.Category",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
 
     def __str__(self):
         return self.name

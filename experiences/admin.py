@@ -12,6 +12,7 @@ class ExperienceAdmin(admin.ModelAdmin):
         "end",
         "created",
     )
+    list_filter = ("category",)
 
 
 @admin.register(Service)
