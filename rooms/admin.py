@@ -9,8 +9,8 @@ class RoomAdmin(admin.ModelAdmin):
         "name",
         "price",
         "type",
+        "total_amenities",
         "owner",
-        "updated",
         "created",
     )
 
@@ -20,7 +20,6 @@ class RoomAdmin(admin.ModelAdmin):
         "pet_friendly",
         "type",
         "amenities",
-        "updated",
         "created",
     )
 
