@@ -11,7 +11,7 @@ class Category(CommonModel):
             "rooms",
             "Rooms",
         )
-        Expereinces = (
+        Experiences = (
             "experiences",
             "Experiences",
         )
