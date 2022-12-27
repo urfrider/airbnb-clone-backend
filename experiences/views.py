@@ -4,9 +4,13 @@ from rest_framework.exceptions import NotFound
 from rest_framework.status import HTTP_204_NO_CONTENT
 from .models import Service
 from .serializers import ServiceSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 class Services(APIView):
+
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     def get(self, request):
         all_services = Service.objects.all()
         serializer = ServiceSerializer(all_services, many=True)
@@ -22,6 +26,9 @@ class Services(APIView):
 
 
 class ServiceDetail(APIView):
+
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     def get_object(self, pk):
         try:
             return Service.objects.get(pk=pk)

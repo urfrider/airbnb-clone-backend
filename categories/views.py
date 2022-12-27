@@ -5,9 +5,13 @@ from rest_framework.status import HTTP_204_NO_CONTENT
 from rest_framework.views import APIView
 from .models import Category
 from .serializers import CategorySerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 class Categories(APIView):
+
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     def get(self, request):
         all_categories = Category.objects.all()
         serializer = CategorySerializer(all_categories, many=True)
@@ -23,6 +27,9 @@ class Categories(APIView):
 
 
 class CategoryDetail(APIView):
+
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     def get_object(self, pk):
         try:
             return Category.objects.get(pk=pk)
